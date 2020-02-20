@@ -16,14 +16,14 @@ hue_dimmer:
   module: deconz_hue_dimmer_enhanced
   class: DeconzHueDimmerEnhanced
   switch_id: id_of_the_switch_in_deconz
-  delay_for_modes: 1500  {# Delay for detection of multiple press #}
+  delay_for_modes: 1500  # Delay for detection of multiple press
 
   light_ids:
     - light.light_1
     - light.light_2
 
-  {# Multiple press will cycle actions #}
-  {# If light is off, last state is restore #}
+  # Multiple press will cycle actions
+  # If light is off, last state is restore
   button_on_short_press_actions:
     - service: light/turn_on
       args:
@@ -41,15 +41,15 @@ hue_dimmer:
       args:
         color_name: yellow
     
-  {# entity_id params in args override the default one #}
-  {# In this case, first press will turn off light.light_1 and 2, second press all the lights #}
+  # entity_id params in args override the default one
+  # In this case, first press will turn off light.light_1 and 2, second press all the lights
   button_off_short_press_actions:
     - service: light/turn_off
     - service: light/turn_off
       args:
         entity_id: all
 
-  {# brightness_delta is a special keyword to smoothly managed brightness #}
+  # brightness_delta is a special keyword to smoothly managed brightness
   dim_up_short_press_actions:
     - service: light/turn_on
       args:
