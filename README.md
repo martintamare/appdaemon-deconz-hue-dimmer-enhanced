@@ -16,7 +16,7 @@ hue_dimmer:
   module: deconz_hue_dimmer_enhanced
   class: DeconzHueDimmerEnhanced
   switch_id: id_of_the_switch_in_deconz
-  delay_for_modes: 1500  # Delay for detection of multiple press
+  delay_for_modes: 1500  {# Delay for detection of multiple press #}
 
   light_ids:
     - light.light_1
