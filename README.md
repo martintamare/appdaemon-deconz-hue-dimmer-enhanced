@@ -2,7 +2,8 @@
 
 AppDaemon app to control hue dimmer switch in a very flexible way.
 
-First intend was to be able to detect multiple press so as to play different action
+First intend was to be able to detect multiple press so as to play different action.
+Code is rought and very generic, it works for my use case ;)
 
 ## Installation
 
@@ -21,6 +22,8 @@ hue_dimmer:
     - light.light_1
     - light.light_2
 
+  {# Multiple press will cycle actions #}
+  {# If light is off, last state is restore #}
   button_on_short_press_actions:
     - service: light/turn_on
       args:
@@ -38,12 +41,15 @@ hue_dimmer:
       args:
         color_name: yellow
     
+  {# entity_id params in args override the default one #}
+  {# In this case, first press will turn off light.light_1 and 2, second press all the lights #}
   button_off_short_press_actions:
     - service: light/turn_off
     - service: light/turn_off
       args:
         entity_id: all
 
+  {# brightness_delta is a special keyword to smoothly managed brightness #}
   dim_up_short_press_actions:
     - service: light/turn_on
       args:
@@ -73,11 +79,11 @@ key | optional | type | default | description
 `class` | False | string | | The name of the Class.
 `delay_for_modes` | True | int | 1500 | The delay for multiple press detection.
 `light_ids` | True | array | [] | Array for light to control.
-`button_on_short_press_actions` | True | dict | {} | Configuration the action for the button.
-`button_on_long_press_actions` | True | dict | {} | Configuration the action for the button.
-`dim_up_short_press_actions` | True | dict | {} | Configuration the action for the button.
-`dim_up_long_press_actions` | True | dict | {} | Configuration the action for the button.
-`dim_down_short_press_actions` | True | dict | {} | Configuration the action for the button.
-`dim_down_long_press_actions` | True | dict | {} | Configuration the action for the button.
-`button_off_short_press_actions` | True | dict | {} | Configuration the action for the button.
-`button_off_long_press_actions` | True | dict | {} | Configuration the action for the button.
+`button_on_short_press_actions` | True | array | [] | Configuration the action for the button.
+`button_on_long_press_actions` | True | array | [] | Configuration the action for the button.
+`dim_up_short_press_actions` | True | array | [] | Configuration the action for the button.
+`dim_up_long_press_actions` | True | array | [] | Configuration the action for the button.
+`dim_down_short_press_actions` | True | array | [] | Configuration the action for the button.
+`dim_down_long_press_actions` | True | array | [] | Configuration the action for the button.
+`button_off_short_press_actions` | True | array | [] | Configuration the action for the button.
+`button_off_long_press_actions` | True | array | [] | Configuration the action for the button.
